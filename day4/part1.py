@@ -71,12 +71,9 @@ for a in board_list:
     a_iter += 1
     b_iter = 0
 
-bigfarts = 0
-for boardChungus in board_list:
-    bigfarts += 1
 
-winners = []
-first = 1
+
+
 for o in drawnNumbers:
     for l in board_list:
         for m in board_list[l_iterator]:
@@ -101,30 +98,8 @@ for o in drawnNumbers:
                         if int(board_list[l_iterator][q][n_iterator]) != -1:
                             bingovertical = "false"
 
-                if ((bingohorizontal == "true" or bingovertical == "true")):
-                    #found = 1
-
-                    dupe = 0
-                    for fart in winners:
-                        if int(fart) == l_iterator:
-                            dupe = 1
-                    
-                    if not dupe == 1:
-                        winners.append(l_iterator)
-                        if (len(winners) == bigfarts):
-                            print("amongus: " + str(l_iterator))
-
-                            realanswer = 0
-                            for quop in range(5):
-                                for glizzy in range(5):
-                                    redsus = int(board_list[l_iterator][quop][glizzy])
-
-                                    if redsus != -1:
-                                        realanswer += redsus
-                            realanswer = realanswer * currentDrawnNum
-                            print(realanswer)
-
-                    
+                if ((bingohorizontal == "true" or bingovertical == "true") and not bool(found)):
+                    found = 1
                     
                     answer = 0
                     for g in range(5):
@@ -133,11 +108,11 @@ for o in drawnNumbers:
 
                             if element != -1:
                                 answer += element
-                    #print(answer)
+                    print(answer)
                     answer = answer * currentDrawnNum
-                    #print(currentDrawnNum)
+                    print(currentDrawnNum)
                     #print(str(l_iterator))
-                    #print("answer: " + str(answer))
+                    print("answer: " + str(answer))
 
 
                 ###
