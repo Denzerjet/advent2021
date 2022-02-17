@@ -1,4 +1,4 @@
-input = open("testinput.txt", "r").read().splitlines()
+input = open("input.txt", "r").read().splitlines()
 
 
 #MISTAKE: I ONLY ADD VENTS TO hasVent WHICH ARE FROM x1,y2 to x2,y2 when x2> x1 and y2>y1 
@@ -18,12 +18,24 @@ for i in input:
     y2 = int(secondHalf.split(",")[1])
 
     if x1 == x2:
-        for y in range (y1, y2+1):
-            hasVent.append([x1,y])
+        if (y1 > y2):
+            y3 = y2
+            while (y3 <= y1):
+                hasVent.append([x1,y3])
+                y3 += 1
+        else:
+            for y in range (y1, y2+1):
+                hasVent.append([x1,y])
 
     if y1 == y2:
-        for x in range (x1, x2+1):
-            hasVent.append([x,y1])
+        if (x1 > x2):
+            x3 = x2
+            while (x3 <= x1):
+                hasVent.append([x3,y1])
+                x3 +=1
+        else: 
+            for x in range (x1, x2+1):
+                hasVent.append([x,y1])
 
 count = 0
 first = 0
@@ -33,19 +45,24 @@ xCoord = int(hasVent[0][0])
 yCoord = int(hasVent[0][1])
 repeat = []
 counter = 0
+embedded_counter = 0
 for coord in hasVent:
     xCoord = int(coord[0])
     yCoord = int(coord[1])
-    print("Outside coord: " + str(coord))
-    hasVent.remove(coord)
+    #print("Outside coord: " + str(coord))
     for coordEmbedded in hasVent:
+        if (counter == embedded_counter):
+            samex = 0
+            samey = 0
+            embedded_counter += 1
+            continue
         #print("Embedded coord: " + str(coordEmbedded))
         if (xCoord == coordEmbedded[0]):
             samex = 1
         if (yCoord == coordEmbedded[1]):
             samey = 1
         if (samex == 1 and samey == 1):
-            print("hi")
+            #print("hi")
             if ([xCoord, yCoord] in repeat):
                 pass
             else:
@@ -53,7 +70,8 @@ for coord in hasVent:
                 repeat.append([xCoord,yCoord])
         samex = 0
         samey = 0
-    hasVent.insert(counter, coord)
+        embedded_counter += 1
+    embedded_counter = 0
     counter += 1
     
 print("Count: " + str(count))
