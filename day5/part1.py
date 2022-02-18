@@ -1,8 +1,5 @@
 input = open("input.txt", "r").read().splitlines()
 
-
-#MISTAKE: I ONLY ADD VENTS TO hasVent WHICH ARE FROM x1,y2 to x2,y2 when x2> x1 and y2>y1 
-#need to evaluate which way the vent vector points and record that correspondinly
 hasVent = []
 for i in input:
     firstHalf = i.split("->")[0]
@@ -46,6 +43,12 @@ yCoord = int(hasVent[0][1])
 repeat = []
 counter = 0
 embedded_counter = 0
+
+#tupleList = tuple(coord for coord in hasVent)
+#setList = set()
+#for coord in hasVent:
+#    setList.update(coord)
+
 for coord in hasVent:
     xCoord = int(coord[0])
     yCoord = int(coord[1])
@@ -56,14 +59,14 @@ for coord in hasVent:
             samey = 0
             embedded_counter += 1
             continue
-        #print("Embedded coord: " + str(coordEmbedded))
+        print("Embedded coord: " + str(coordEmbedded))
         if (xCoord == coordEmbedded[0]):
             samex = 1
         if (yCoord == coordEmbedded[1]):
             samey = 1
         if (samex == 1 and samey == 1):
             #print("hi")
-            if ([xCoord, yCoord] in repeat):
+            if (tuple(xCoord, yCoord) in repeat):
                 pass
             else:
                 count = count + 1
