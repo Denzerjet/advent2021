@@ -44,10 +44,22 @@ repeat = []
 counter = 0
 embedded_counter = 0
 
-#tupleList = tuple(coord for coord in hasVent)
+tupleList = tuple(coord for coord in hasVent)
 #setList = set()
 #for coord in hasVent:
 #    setList.update(coord)
+
+
+#Hashes are codes that correspond to numbers, you can only hash immutable types
+#Need to make second list to see if an item has been visted before
+#Just iterate through hashSet and see if two items have the same hashCode and then keep track of revsiitng the same coord or 
+#more than 2 overlap through count and a second set of ints or smth
+hashSet = set()
+for coord in hasVent:
+    hashSet.update([hash(coord[0])])
+    #hashSet.update(hash(tupleCoord[1]))
+
+
 
 for coord in hasVent:
     xCoord = int(coord[0])
