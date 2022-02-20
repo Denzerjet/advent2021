@@ -44,49 +44,11 @@ repeat = []
 counter = 0
 embedded_counter = 0
 
-tupleList = tuple(coord for coord in hasVent)
-#setList = set()
-#for coord in hasVent:
-#    setList.update(coord)
-
-
-#Hashes are codes that correspond to numbers, you can only hash immutable types
-#Need to make second list to see if an item has been visted before
-#Just iterate through hashSet and see if two items have the same hashCode and then keep track of revsiitng the same coord or 
-#more than 2 overlap through count and a second set of ints or smth
 hashSet = set()
+duplicateSet = set()
 for coord in hasVent:
-    hashSet.update([hash(coord[0])])
-    #hashSet.update(hash(tupleCoord[1]))
+    if (tuple([coord[0], coord[1]]) in hashSet):
+        duplicateSet.add(tuple([coord[0], coord[1]]))
+    hashSet.add(tuple([coord[0], coord[1]]))
 
-
-
-for coord in hasVent:
-    xCoord = int(coord[0])
-    yCoord = int(coord[1])
-    #print("Outside coord: " + str(coord))
-    for coordEmbedded in hasVent:
-        if (counter == embedded_counter):
-            samex = 0
-            samey = 0
-            embedded_counter += 1
-            continue
-        print("Embedded coord: " + str(coordEmbedded))
-        if (xCoord == coordEmbedded[0]):
-            samex = 1
-        if (yCoord == coordEmbedded[1]):
-            samey = 1
-        if (samex == 1 and samey == 1):
-            #print("hi")
-            if (tuple(xCoord, yCoord) in repeat):
-                pass
-            else:
-                count = count + 1
-                repeat.append([xCoord,yCoord])
-        samex = 0
-        samey = 0
-        embedded_counter += 1
-    embedded_counter = 0
-    counter += 1
-    
-print("Count: " + str(count))
+print(len(duplicateSet))
