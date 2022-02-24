@@ -43,23 +43,27 @@ for i in input:
                 hasVent.append([min(x1,x2)+k,min(y1,y2)+k])
                 k += 1
         else:
-            x3 = max(x1,x2) - min(x1,x2)
+            x3 = abs(max(x1,x2) - min(x1,x2))
             k = 0
             if (x2 > x1 and y2 > y1):
-                while (k <= x3):
+                while (k < x3):
                     hasVent.append([x1+k,y1+k])
+                    print([x1+k,y1+k])
                     k += 1
             if (x2 > x1 and y1 > y2):
-                while (k <= x3):
+                while (k < x3):
                     hasVent.append([x1+k,y1-k])
+                    print([x1+k,y1+k])
                     k += 1
             if (x1 > x2 and y2 > y1):
-                while (k <= x3):
+                while (k < x3):
                     hasVent.append([x2+k,y2-k])
+                    print([x1+k,y1+k])
                     k += 1
             if (x1 > x2 and y1 > y2):
-                while (k <= x3):
+                while (k < x3):
                     hasVent.append([x2+k,y2+k])
+                    print([x1+k,y1+k])
                     k += 1
 
 
