@@ -46,36 +46,24 @@ for i in input:
             x3 = abs(max(x1,x2) - min(x1,x2))
             k = 0
             if (x2 > x1 and y2 > y1):
-                while (k < x3):
+                while (k <= x3):
                     hasVent.append([x1+k,y1+k])
-                    print([x1+k,y1+k])
                     k += 1
             if (x2 > x1 and y1 > y2):
-                while (k < x3):
+                while (k <= x3):
                     hasVent.append([x1+k,y1-k])
-                    print([x1+k,y1+k])
                     k += 1
             if (x1 > x2 and y2 > y1):
-                while (k < x3):
+                while (k <= x3):
                     hasVent.append([x2+k,y2-k])
-                    print([x1+k,y1+k])
                     k += 1
             if (x1 > x2 and y1 > y2):
-                while (k < x3):
+                while (k <= x3):
                     hasVent.append([x2+k,y2+k])
-                    print([x1+k,y1+k])
                     k += 1
 
-
-count = 0
-first = 0
-samex = 0
-samey = 0
-xCoord = int(hasVent[0][0])
-yCoord = int(hasVent[0][1])
-repeat = []
-counter = 0
-embedded_counter = 0
+for coord in hasVent:
+    print(coord)
 
 hashSet = set()
 duplicateSet = set()
