@@ -1,6 +1,6 @@
 import math
 
-input = open("testinput.txt", "r").read().splitlines()
+input = open("input.txt", "r").read().splitlines()
 
 hasVent = []
 for i in input:
@@ -36,31 +36,24 @@ for i in input:
             for x in range (x1, x2+1):
                 hasVent.append([x,y1])
     else:
-        if (y2 > y1):
-            x3 = max(x1,x2) - min(x1,x2)
-            k = 0
+        x3 = abs(max(x1,x2) - min(x1,x2))
+        k = 0
+        if (x2 > x1 and y2 > y1):
             while (k <= x3):
-                hasVent.append([min(x1,x2)+k,min(y1,y2)+k])
+                hasVent.append([x1+k,y1+k])
                 k += 1
-        else:
-            x3 = abs(max(x1,x2) - min(x1,x2))
-            k = 0
-            if (x2 > x1 and y2 > y1):
-                while (k <= x3):
-                    hasVent.append([x1+k,y1+k])
-                    k += 1
-            if (x2 > x1 and y1 > y2):
-                while (k <= x3):
-                    hasVent.append([x1+k,y1-k])
-                    k += 1
-            if (x1 > x2 and y2 > y1):
-                while (k <= x3):
-                    hasVent.append([x2+k,y2-k])
-                    k += 1
-            if (x1 > x2 and y1 > y2):
-                while (k <= x3):
-                    hasVent.append([x2+k,y2+k])
-                    k += 1
+        if (x2 > x1 and y1 > y2):
+            while (k <= x3):
+                hasVent.append([x1+k,y1-k])
+                k += 1
+        if (x1 > x2 and y2 > y1):
+            while (k <= x3):
+                hasVent.append([x2+k,y2-k])
+                k += 1
+        if (x1 > x2 and y1 > y2):
+            while (k <= x3):
+                hasVent.append([x2+k,y2+k])
+                k += 1
 
 for coord in hasVent:
     print(coord)
