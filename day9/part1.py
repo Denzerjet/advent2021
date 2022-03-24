@@ -10,7 +10,7 @@ sum = 0
 
 #note: have to iterate by a number in range (...) because we tuples can't be converted to ints for comparisons
 for outer in range (0, len(inputTuple)):
-    largest = True
+    smallest = True
     for inner in range(0, len(inputTuple[outer])):
         #have a variable here and make all the following if statements nots, then
         #make a comparison to the right to the right (inner + 1) if inner != len(inputTuple[outer]) - 1
@@ -18,16 +18,26 @@ for outer in range (0, len(inputTuple)):
         #if the variable is true add it plus one to sum
         if (inner != 0):
             #if not on the left edge, compare to an element on the left
-            largest = inputTuple[outer][inner] < inputTuple[outer][inner + 1]
-        if (inner =! len(inputTuple[outer]) - 1):
-            #if not on the right edge, compare to an element 
-            pass
-        if (outer == 0):
-            #top edge
-            pass
-        if (outer == len(inputTuple) - 1):
-            #bottom edge
-            pass
-        if (largest):
+            ##print("Outer: " + str(outer))
+            ##print("Inner: " + str(inner))
+            ##print("First num: " + inputTuple[outer][inner])
+            ##print("Second num: " + inputTuple[outer][inner - 1])
+            smallest = inputTuple[outer][inner] < inputTuple[outer][inner - 1]
+        if ((inner != len(inputTuple[outer]) - 1) and (smallest)):
+            #if not on the right edge, compare to an element on the right
+            smallest = inputTuple[outer][inner] < inputTuple[outer][inner + 1]
+        if ((outer != 0) and (smallest)):
+            #not top edge
+            smallest = inputTuple[outer][inner] < inputTuple[outer - 1][inner]
+        if ((outer != len(inputTuple) - 1) and (smallest)):
+            #not bottom edge
+            smallest = inputTuple[outer][inner] < inputTuple[outer + 1][inner]
+        if (smallest):
             #add it plus one to sum
-            pass
+            #print("Outer: " + str(outer))
+            #print("Inner: " + str(inner))
+            #print(inputTuple[outer][inner])
+            sum += 1 + int(inputTuple[outer][inner])
+
+
+print("Sum: " + str(sum))
