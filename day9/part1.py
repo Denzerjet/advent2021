@@ -1,6 +1,5 @@
 input = open("input.txt", "r").read().splitlines()
 
-length = 0
 inputTuple = tuple(tuple(i) for i in input)
 sum = 0
 
@@ -10,7 +9,7 @@ sum = 0
 
 #note: have to iterate by a number in range (...) because we tuples can't be converted to ints for comparisons
 for outer in range (0, len(inputTuple)):
-    smallest = True
+    smallest = 0
     for inner in range(0, len(inputTuple[outer])):
         #have a variable here and make all the following if statements nots, then
         #make a comparison to the right to the right (inner + 1) if inner != len(inputTuple[outer]) - 1
