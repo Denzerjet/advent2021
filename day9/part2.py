@@ -1,7 +1,63 @@
+def findVent(x, y):
+    for outer in range (0, len(inputTuple)):
+        for inner in range(0, len(inputTuple[outer])):
+            dir = -1
+            comp = -1
+            compto = -1
+            # if not a 9, consider for regional mass
+            
+            # check each direction, find the greatest difference, but if the end difference isnt positive then skip
+            if (inputTuple[outer][inner] != 9):
+                if (inner != 0):
+                    comp = inputTuple[outer][inner] - inputTuple[outer][inner - 1]
+                    dir = 0
+                if (inner != len(inputTuple[outer]) - 1):
+                    compto = inputTuple[outer][inner] - inputTuple[outer][inner + 1]
+
+                    comp = min(comp, compto)
+
+                    if (comp == compto):
+                        dir = 1
+                if (outer != 0):
+                    compto = inputTuple[outer][inner] - inputTuple[outer - 1][inner]
+
+                    comp = min(comp, compto)
+
+                    if (comp == compto):
+                        dir = 2
+                if (outer != len(inputTuple) - 1):
+                    compto = inputTuple[outer][inner] - inputTuple[outer + 1][inner]
+
+                    comp = min(comp, compto)
+
+                    if (comp == compto):
+                        dir = 3
+                
+                # if there was an adjacent (not including diagonals) square that water would flow to
+                # would need to store outer and inner as x and y so that once you find the vent that a square corresponds to
+                # you can then continue from the original square seeing as the or
+
+                # revision: create function findVent() which goes through inputTuble and navigates to the corresponding vent
+                if (comp > 0):
+                    if (dir == 0):
+                        inner -= 1
+                    if (dir == 1):
+                        inner += 1
+                    if (dir == 2):
+                        outer -= 1
+                    if (dir == 3):
+                        outer += 1
+                else:
+                    # if we have navigated to the vent 
+                    return (outer, inner)
+    return -1
+
+
 input = open("input.txt", "r").read().splitlines()
 
 inputTuple = tuple(tuple(i) for i in input)
-arr = []
+vents = []
+ventHashMap = dict()
 
 for outer in range (0, len(inputTuple)):
     smallest = 0
@@ -15,7 +71,12 @@ for outer in range (0, len(inputTuple)):
         if ((outer != len(inputTuple) - 1) and (smallest)):
             smallest = inputTuple[outer][inner] < inputTuple[outer + 1][inner]
         if (smallest):
-            arr = arr + [[outer,inner]]
+            vents = vents + [[outer,inner]]
+
+for vent in vents:
+    ventHashMap[hash(str(vent))] = 0
+
+print(ventHashMap)
 
 # plan: go through each marked coordinant and iterate out from there to count out the size of its "region"
 # have an array of 3 elements, for each coordinate's regional size compare to lowest element in array and replace if greater
@@ -28,62 +89,12 @@ for outer in range (0, len(inputTuple)):
 # store as hash, compare to hash, for index with matching add one to sizes
 
 # I have realized that my part1 solution is not fully correct
-sizes = [0] * len(arr)
 
-comp = -1
-compto = -1
-dir = -1
 
-x = -1
-y = -1
-# 0 1 2 3
+value = 0
 for outer in range (0, len(inputTuple)):
     for inner in range(0, len(inputTuple[outer])):
-        # if not a 9, consider for regional mass
-        
-        # check each direction, find the greatest difference, but if the end difference isnt positive then skip
-        if (inputTuple[outer][inner] != 9):
-            if (inner != 0):
-                comp = inputTuple[outer][inner] - inputTuple[outer][inner - 1]
-                dir = 0
-            if (inner != len(inputTuple[outer]) - 1):
-                compto = inputTuple[outer][inner] - inputTuple[outer][inner + 1]
+        value = findVent(outer, inner)
 
-                comp = min(comp, compto)
-
-                if (comp == compto):
-                    dir = 1
-            if (outer != 0):
-                compto = inputTuple[outer][inner] - inputTuple[outer - 1][inner]
-
-                comp = min(comp, compto)
-
-                if (comp == compto):
-                    dir = 2
-            if (outer != len(inputTuple) - 1):
-                compto = inputTuple[outer][inner] - inputTuple[outer - 1][inner]
-
-                comp = min(comp, compto)
-
-                if (comp == compto):
-                    dir = 3
-            
-            # if there was an adjacent (not including diagonals) square that water would flow to
-            # would need to store outer and inner as x and y so that once you find the vent that a square corresponds to
-            # you can then continue from the original square seeing as the or
-
-            # revision: create function findVent() which goes through inputTuble and navigates to the corresponding vent
-            if (comp > 0):
-                if (dir == 0):
-                    pass
-                if (dir == 1):
-                    pass
-                if (dir == 2):
-                    pass
-                if (dir == 3):
-                    pass
-            else:
-                # if we have navigated to the vent 
-                pass
-
-print(sizes)
+        if (value != -1):
+            pass
